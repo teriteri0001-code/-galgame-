@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "运维工作/打印机新添步骤.md",
+                "file": "我是大潮比/为什么潮比例没有东西.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "打印机新添步骤"
+              "title": "为什么潮比例没有东西"
             }
           }
         ],
@@ -186,14 +186,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "dc5db15abca694fe",
+  "active": "5485267897352601",
   "lastOpenFiles": [
+    "运维工作/打印机新添步骤.md",
+    "我是大潮比/为什么潮比例没有东西.md",
     "我是大潮比",
     "运维工作/OA账号密码（Emobile7）.md",
     "运维工作/改域密码（域内好多文件资源）.md",
     "运维工作/t.wapsh.com.md",
     "运维工作/adobe acrobat DC.md",
-    "运维工作/打印机新添步骤.md",
     "运维工作/3F服务器密码.md",
     "运维工作/cisco交换机代码.md",
     "运维工作/未命名.md",
@@ -233,7 +234,6 @@
     "linux",
     "winserver系统",
     "蓝屏原因",
-    "动态路由",
-    "深信服AF"
+    "动态路由"
   ]
 }
