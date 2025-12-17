@@ -182,11 +182,13 @@
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5485267897352601",
+  "active": "dc5db15abca694fe",
   "lastOpenFiles": [
+    "我是大潮比",
     "运维工作/OA账号密码（Emobile7）.md",
     "运维工作/改域密码（域内好多文件资源）.md",
     "运维工作/t.wapsh.com.md",
@@ -223,7 +225,6 @@
     "动态路由/ipsec.md",
     "nginx/openssl证书用于网站.md",
     "深信服AF/流程.md",
-    "深信服AF/上架及排查.md",
     "未命名.canvas",
     "nginx",
     "NAC",
