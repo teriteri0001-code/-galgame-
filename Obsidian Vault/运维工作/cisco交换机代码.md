@@ -1,0 +1,1 @@
+判断上行 show cdp neighbors 

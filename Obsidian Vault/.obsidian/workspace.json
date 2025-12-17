@@ -1,0 +1,238 @@
+{
+  "main": {
+    "id": "072d18e474dd5439",
+    "type": "split",
+    "children": [
+      {
+        "id": "94bf95eed36dee75",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8cf114f73d8123a2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "运维工作/3F服务器密码.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3F服务器密码"
+            }
+          },
+          {
+            "id": "5485267897352601",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "运维工作/打印机新添步骤.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "打印机新添步骤"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b10922533f078582",
+    "type": "split",
+    "children": [
+      {
+        "id": "18ad378ff810b096",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dc5db15abca694fe",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byCreatedTimeReverse",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "3a39acf2bfd061ca",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "0cb06e29f6510263",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "9dc8fabd2220ea73",
+    "type": "split",
+    "children": [
+      {
+        "id": "77edfb5d4ef2f4c9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "454aa7c1bcf49d62",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "运维工作/cisco交换机代码.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "cisco交换机代码 的反向链接列表"
+            }
+          },
+          {
+            "id": "d91496a9f164f8b1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "运维工作/cisco交换机代码.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "cisco交换机代码 的出链列表"
+            }
+          },
+          {
+            "id": "86a7acaacd73ebbe",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "1e90ce466e86eba9",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "运维工作/cisco交换机代码.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "cisco交换机代码 的大纲"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:创建新数据库": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "5485267897352601",
+  "lastOpenFiles": [
+    "运维工作/OA账号密码（Emobile7）.md",
+    "运维工作/改域密码（域内好多文件资源）.md",
+    "运维工作/t.wapsh.com.md",
+    "运维工作/adobe acrobat DC.md",
+    "运维工作/打印机新添步骤.md",
+    "运维工作/3F服务器密码.md",
+    "运维工作/cisco交换机代码.md",
+    "运维工作/未命名.md",
+    "运维工作/新员工域账号注册以及重装电脑加域.md",
+    "运维工作/弱电管理及k3管理.md",
+    "运维工作/企业微信邮箱密码.md",
+    "运维工作/PLM账户及vpn.md",
+    "Pasted image 20251211162035.png",
+    "Pasted image 20251211161847.png",
+    "Pasted image 20251211131055.png",
+    "Pasted image 20251211131022.png",
+    "运维工作/车间机柜ip.md",
+    "nginx/nginx.md",
+    "nginx/nginx证书.md",
+    "nginx/centos7安装nginx.md",
+    "NAC/流程.md",
+    "NAC/接口配置.md",
+    "Pasted image 20251209151820.png",
+    "Pasted image 20251209143028.png",
+    "Pasted image 20251209105956.png",
+    "Pasted image 20251209104921.png",
+    "Pasted image 20251209104501.png",
+    "Pasted image 20251209104407.png",
+    "运维工作.md",
+    "运维工作",
+    "未命名 5.md",
+    "二层配置/nat.md",
+    "动态路由/ipsec默认版.md",
+    "动态路由/ipsec.md",
+    "nginx/openssl证书用于网站.md",
+    "深信服AF/流程.md",
+    "深信服AF/上架及排查.md",
+    "未命名.canvas",
+    "nginx",
+    "NAC",
+    "未命名 2",
+    "未命名 1",
+    "linux",
+    "winserver系统",
+    "蓝屏原因",
+    "动态路由",
+    "深信服AF"
+  ]
+}
