@@ -25,14 +25,12 @@
             "id": "5485267897352601",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "我是大潮比/为什么潮比例没有东西.md",
-                "mode": "source",
-                "source": false
+                "file": "Pasted image 20240715225538.png"
               },
-              "icon": "lucide-file",
-              "title": "为什么潮比例没有东西"
+              "icon": "lucide-image",
+              "title": "Pasted image 20240715225538"
             }
           }
         ],
@@ -186,10 +184,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5485267897352601",
+  "active": "dc5db15abca694fe",
   "lastOpenFiles": [
-    "运维工作/打印机新添步骤.md",
     "我是大潮比/为什么潮比例没有东西.md",
+    "运维工作/打印机新添步骤.md",
     "我是大潮比",
     "运维工作/OA账号密码（Emobile7）.md",
     "运维工作/改域密码（域内好多文件资源）.md",
