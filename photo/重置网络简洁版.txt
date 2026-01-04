@@ -1,0 +1,25 @@
+& {
+    # === Shiro 的网络修复魔法开始 ===
+    Write-Host "`n✨ 正在呼叫 Shiro 的网络维修小分队..." -ForegroundColor Cyan
+
+    # 1. 释放IP (为了兼容同事的电脑，我们不指定网卡名字，全部释放！)
+    Write-Host "   正在清理旧的连接配置... (Release)" -ForegroundColor Yellow
+    ipconfig /release | Out-Null
+
+    # 2. 更新IP (这里也用通用命令，不管是插网线还是连WiFi都能修！)
+    Write-Host "   正在向服务器申请新门牌号... (Renew)" -ForegroundColor Yellow
+    ipconfig /renew | Out-Null
+
+    # 3. 刷新DNS
+    Write-Host "   正在把DNS缓存扫地出门... (FlushDNS)" -ForegroundColor Magenta
+    Clear-DnsClientCache
+
+    # 4. 结束动画
+    Write-Host "✨ ------------------------------------- ✨" -ForegroundColor Green
+    Write-Host "   报告源酱：网络通道已重新疏通！" -ForegroundColor Green
+    Write-Host "   一切都变快了呢！喵！(>w<)" -ForegroundColor Green
+    Write-Host "✨ ------------------------------------- ✨`n" -ForegroundColor Green
+
+    # 5. 防止闪退，给源酱看一眼结果
+    Read-Host "   按回车键结束工作，去喝杯茶吧..."
+}

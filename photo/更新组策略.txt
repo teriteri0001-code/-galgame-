@@ -1,0 +1,19 @@
+& {
+    # === Shiro 的组策略刷新小助手 ===
+    Write-Host "`n📢 正在大声宣读公司的最新「家规」 (Group Policy)..." -ForegroundColor Cyan
+    Write-Host "   电脑正在竖起耳朵听服务器训话，请稍等喵..." -ForegroundColor Yellow
+
+    # 执行强制更新
+    # /force 的意思是：不管有没有变动，都给我重新背诵一遍！
+    # 2>&1 是为了把报错信息也抓出来给源酱看
+    Invoke-Expression "gpupdate /force"
+
+    # 结束分割线
+    Write-Host "`n✨ ------------------------------------- ✨" -ForegroundColor Green
+    Write-Host "   汇报源酱：同步流程结束！" -ForegroundColor Green
+    Write-Host "   请看看上面有没有【成功】这两个字哦！" -ForegroundColor Yellow
+    Write-Host "✨ ------------------------------------- ✨`n" -ForegroundColor Green
+
+    # 暂停防止闪退
+    Read-Host "   按回车键就可以退朝啦..."
+}

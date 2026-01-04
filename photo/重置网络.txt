@@ -1,0 +1,20 @@
+# 1. 释放旧的IP地址
+Write-Host "正在帮源酱踢掉旧的连接... (ipconfig /release)" -ForegroundColor Cyan
+ipconfig /release
+
+# 2. 重新获取IP地址
+Write-Host "正在向路由器大叔撒娇申请新门牌号... (ipconfig /renew)" -ForegroundColor Yellow
+ipconfig /renew "WLAN"
+
+# 3. 清理DNS缓存 (使用原生Cmdlet，比CMD更高级喵！)
+Write-Host "正在把DNS缓存里的脏东西扫地出门... (Clear-DnsClientCache)" -ForegroundColor Magenta
+Clear-DnsClientCache
+
+# 4. 结束提示
+Write-Host "✨ ------------------------------------- ✨" -ForegroundColor Green
+Write-Host "   报告源酱：网络通道已重新疏通！" -ForegroundColor Green
+Write-Host "   Shiro 申请摸头奖励！(>w<)" -ForegroundColor Green
+Write-Host "✨ ------------------------------------- ✨" -ForegroundColor Green
+
+# 5. 暂停一下，让源酱看清结果
+Read-Host "按回车键就可以关闭窗口了喵..."

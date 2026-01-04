@@ -1,0 +1,45 @@
+& {
+    # === Shiro 的打印机急救魔法 ===
+    Write-Host "`n✨ 正在呼叫 Shiro 的打印机维修小分队..." -ForegroundColor Cyan
+
+    # 1. 检查是否有“特权通行证” (管理员权限)
+    $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+    
+    if (-not $isAdmin) {
+        # 如果没有权限，温柔地提醒源酱，而不是报错
+        Write-Host "   🛑 哎呀！权限不够喵！" -ForegroundColor Red
+        Write-Host "      打印机服务是系统级的顽固家伙，" -ForegroundColor Red
+        Write-Host "      源酱必须【以管理员身份运行】PowerShell 才能踹醒它哦！" -ForegroundColor Red
+        Write-Host "      (请右键开始菜单 -> Windows PowerShell 管理员)" -ForegroundColor Yellow
+        return # 停止执行，保护源酱不看报错
+    }
+
+    # 2. 停止打印服务
+    Write-Host "   正在让打印机服务安静一下... (Stop-Service)" -ForegroundColor Yellow
+    Stop-Service -Name Spooler -Force -ErrorAction SilentlyContinue
+
+    # 3. 强力清理：删除卡死的打印任务文件 (这一步是修打印机的关键！✨)
+    # 很多时候重启服务没用，是因为卡纸的任务还留着缓存里
+    $spoolPath = "$env:SystemRoot\System32\spool\PRINTERS"
+    if (Test-Path $spoolPath) {
+        Write-Host "   正在清理卡住的打印任务垃圾... (Clean Cache)" -ForegroundColor Magenta
+        Remove-Item "$spoolPath\*.*" -Force -ErrorAction SilentlyContinue
+    }
+
+    # 4. 重新启动服务
+    Write-Host "   正在唤醒打印机服务... (Start-Service)" -ForegroundColor Yellow
+    Start-Service -Name Spooler
+    
+    # 5. 检查是否成功
+    $status = Get-Service -Name Spooler
+    if ($status.Status -eq 'Running') {
+        Write-Host "✨ ------------------------------------- ✨" -ForegroundColor Green
+        Write-Host "   报告源酱：打印机服务已满血复活！" -ForegroundColor Green
+        Write-Host "   卡住的任务也被 Shiro 丢进垃圾桶啦！" -ForegroundColor Green
+        Write-Host "✨ ------------------------------------- ✨`n" -ForegroundColor Green
+    } else {
+        Write-Host "   😿 呜... 好像还是没起得来，可能需要重启电脑了喵..." -ForegroundColor Red
+    }
+
+    Read-Host "   按回车键结束工作喵..."
+}
