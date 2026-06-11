@@ -1,0 +1,612 @@
+show running-config
+Building configuration...
+
+Current configuration : 14018 bytes
+!
+! Last configuration change at 23:48:11 UTC Tue Jun 9 2026 by cisco
+!
+version 15.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname sw01
+!
+boot-start-marker
+boot system flash bootflash:cat4500e-universalk9.SPA.03.09.00.E.152-5.E.bin
+boot-end-marker
+!
+!
+vrf definition mgmtVrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable secret 5 $1$oEng$Y6Ly2mAdAneG409MylOds1
+enable password wapsh
+!
+username cisco password 0 wapsh
+no aaa new-model
+!
+switch virtual domain 100
+ switch mode virtual
+ switch 2 priority 10
+ mac-address use-virtual
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip dhcp excluded-address 10.12.20.1 10.12.20.49
+ip dhcp excluded-address 10.12.20.200 10.12.20.254
+ip dhcp excluded-address 10.12.20.100 10.12.20.160
+ip dhcp excluded-address 10.12.48.1
+!
+ip dhcp pool vlan20
+ network 10.12.20.0 255.255.255.0
+ dns-server 10.11.10.10 10.11.10.12 
+ default-router 10.12.20.1 
+ lease 7
+!
+ip dhcp pool BTB
+ network 10.12.44.0 255.255.254.0
+ dns-server 114.114.114.114 
+ default-router 10.12.45.1 
+ lease 0 8
+!
+ip dhcp pool WCS
+ network 10.12.48.0 255.255.255.0
+ dns-server 10.11.10.10 10.11.10.12 
+ default-router 10.12.48.1 
+ lease 0 8
+!
+!
+vtp mode transparent
+!
+!
+!
+power redundancy-mode redundant
+!
+mac access-list extended VSL-BPDU
+ permit any 0180.c200.0000 0000.0000.0003
+mac access-list extended VSL-CDP
+ permit any host 0100.0ccc.cccc
+mac access-list extended VSL-DOT1x
+ permit any any 0x888E
+mac access-list extended VSL-GARP
+ permit any host 0180.c200.0020
+mac access-list extended VSL-LLDP
+ permit any host 0180.c200.000e
+mac access-list extended VSL-MGMT
+ permit any 0022.bdcd.d200 0000.0000.00ff
+ permit 0022.bdcd.d200 0000.0000.00ff any
+mac access-list extended VSL-SSTP
+ permit any host 0100.0ccc.cccd
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+redundancy
+ mode sso
+!
+vlan internal allocation policy ascending
+!
+vlan 2-3,5,10-17,20,30,41-43,45 
+!
+vlan 48
+ name TO-wireless-WCS
+!
+vlan 99-101 
+lldp run
+!
+!
+class-map match-any VSL-MGMT-PACKETS
+ match access-group name VSL-MGMT
+class-map match-any VSL-DATA-PACKETS
+ match any 
+class-map match-any VSL-L2-CONTROL-PACKETS
+ match access-group name VSL-DOT1x
+ match access-group name VSL-BPDU
+ match access-group name VSL-CDP
+ match access-group name VSL-LLDP
+ match access-group name VSL-SSTP
+ match access-group name VSL-GARP
+class-map match-any VSL-L3-CONTROL-PACKETS
+ match access-group name VSL-IPV4-ROUTING
+ match access-group name VSL-BFD
+ match access-group name VSL-DHCP-CLIENT-TO-SERVER
+ match access-group name VSL-DHCP-SERVER-TO-CLIENT
+ match access-group name VSL-DHCP-SERVER-TO-SERVER
+ match access-group name VSL-IPV6-ROUTING
+class-map match-any VSL-MULTIMEDIA-TRAFFIC
+ match dscp af41 
+ match dscp af42 
+ match dscp af43 
+ match dscp af31 
+ match dscp af32 
+ match dscp af33 
+ match dscp af21 
+ match dscp af22 
+ match dscp af23 
+class-map match-any VSL-VOICE-VIDEO-TRAFFIC
+ match dscp ef 
+ match dscp cs4 
+ match dscp cs5 
+class-map match-any VSL-SIGNALING-NETWORK-MGMT
+ match dscp cs2 
+ match dscp cs3 
+ match dscp cs6 
+ match dscp cs7 
+!
+policy-map VSL-Queuing-Policy
+ class VSL-MGMT-PACKETS
+  bandwidth percent 5 
+ class VSL-L2-CONTROL-PACKETS
+  bandwidth percent 5 
+ class VSL-L3-CONTROL-PACKETS
+  bandwidth percent 5 
+ class VSL-VOICE-VIDEO-TRAFFIC
+  bandwidth percent 30 
+ class VSL-SIGNALING-NETWORK-MGMT
+  bandwidth percent 10 
+ class VSL-MULTIMEDIA-TRAFFIC
+  bandwidth percent 20 
+ class VSL-DATA-PACKETS
+  bandwidth percent 20 
+ class class-default
+  bandwidth percent 5 
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel9
+ switchport
+ switchport mode trunk
+!
+interface Port-channel10
+ switchport
+ switchport mode trunk
+ switchport nonegotiate
+ switch virtual link 1
+!
+interface Port-channel12
+ switchport
+ switchport mode trunk
+!
+interface Port-channel13
+ switchport
+ switchport mode trunk
+!
+interface Port-channel20
+ switchport
+ switchport mode trunk
+ switchport nonegotiate
+ switch virtual link 2
+!
+interface FastEthernet1
+ vrf forwarding mgmtVrf
+ no ip address
+ speed auto
+ duplex auto
+!
+interface TenGigabitEthernet1/1/1
+ description TO-Juniper-SRX550
+ switchport access vlan 2
+ switchport mode access
+ ip access-group DENY in
+!
+interface TenGigabitEthernet1/1/2
+!
+interface TenGigabitEthernet1/1/3
+ switchport mode trunk
+ channel-group 9 mode active
+!
+interface TenGigabitEthernet1/1/4
+!
+interface TenGigabitEthernet1/1/5
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/1/6
+ description TO-6F-SW08
+ switchport trunk allowed vlan 3,16,20,30,41-43,45
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/1/7
+ switchport trunk allowed vlan 3,15,20,30,41-43,45
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/1/8
+ description TO-4F-SW09
+ switchport mode trunk
+ channel-group 9 mode active
+!
+interface TenGigabitEthernet1/1/9
+ description TO-3F-SW05
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/1/10
+ description TO-2F-SW07
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/1/11
+ description TO-1F-SW06
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/1/12
+ description TO-SW03-TenG1/0/1
+ switchport mode trunk
+ shutdown
+ channel-group 12 mode active
+!
+interface TenGigabitEthernet1/1/13
+ description TO-SW03-TenG2/0/1
+ switchport mode trunk
+ channel-group 13 mode active
+!
+interface TenGigabitEthernet1/1/14
+ description TO-SW01-TenG2/1/14
+ dual-active fast-hello
+!
+interface TenGigabitEthernet1/1/15
+ description TO-SW01-TenG2/1/15
+ switchport mode trunk
+ switchport nonegotiate
+ no lldp transmit
+ no lldp receive
+ channel-group 10 mode on
+ service-policy output VSL-Queuing-Policy
+!
+interface TenGigabitEthernet1/1/16
+ description TO-SW01-TenG2/1/16
+ switchport mode trunk
+ switchport nonegotiate
+ no lldp transmit
+ no lldp receive
+ channel-group 10 mode on
+ service-policy output VSL-Queuing-Policy
+!
+interface TenGigabitEthernet1/2/1
+ description TO-changqu-SW14
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/2/2
+ switchport trunk allowed vlan 3,20,41-43,45,100
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/2/3
+ switchport trunk allowed vlan 3,20,41-43,45,100
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/2/4
+ description TO-changqu-SW12
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/2/5
+ description TO-changqu-SW13
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/2/6
+!
+interface TenGigabitEthernet1/2/7
+!
+interface TenGigabitEthernet1/2/8
+!
+interface TenGigabitEthernet2/1/1
+ switchport access vlan 99
+ switchport mode trunk
+!
+interface TenGigabitEthernet2/1/2
+!
+interface TenGigabitEthernet2/1/3
+!
+interface TenGigabitEthernet2/1/4
+!
+interface TenGigabitEthernet2/1/5
+!
+interface TenGigabitEthernet2/1/6
+ switchport trunk allowed vlan 3,16,20,30,41-43,45
+!
+interface TenGigabitEthernet2/1/7
+ switchport trunk allowed vlan 3,15,20,30,41-43,45
+!
+interface TenGigabitEthernet2/1/8
+ description TO-4F-SW9
+ switchport mode trunk
+ channel-group 9 mode active
+!
+interface TenGigabitEthernet2/1/9
+ switchport trunk allowed vlan 3,13,20,30,41-43,45
+!
+interface TenGigabitEthernet2/1/10
+ switchport trunk allowed vlan 3,12,20,30,41-43,45
+!
+interface TenGigabitEthernet2/1/11
+ switchport trunk allowed vlan 3,11,20,30,41-43,45
+ switchport mode trunk
+!
+interface TenGigabitEthernet2/1/12
+ description TO-SW03-TenG1/0/2
+ switchport mode trunk
+ channel-group 12 mode active
+!
+interface TenGigabitEthernet2/1/13
+ description TO-SW03-TenG1/0/1
+ switchport mode trunk
+ channel-group 13 mode active
+!
+interface TenGigabitEthernet2/1/14
+ description TO-SW01-TenG1/1/14
+ dual-active fast-hello
+!
+interface TenGigabitEthernet2/1/15
+ description TO-SW01-TenG1/1/15
+ switchport mode trunk
+ switchport nonegotiate
+ no lldp transmit
+ no lldp receive
+ channel-group 20 mode on
+ service-policy output VSL-Queuing-Policy
+!
+interface TenGigabitEthernet2/1/16
+ description TO-SW01-TenG1/1/16
+ switchport mode trunk
+ switchport nonegotiate
+ no lldp transmit
+ no lldp receive
+ channel-group 20 mode on
+ service-policy output VSL-Queuing-Policy
+!
+interface TenGigabitEthernet2/2/1
+ switchport trunk allowed vlan 3,41-43,45,100
+ switchport mode trunk
+!
+interface TenGigabitEthernet2/2/2
+ switchport trunk allowed vlan 3,41-43,45,100
+ switchport mode trunk
+!
+interface TenGigabitEthernet2/2/3
+ switchport trunk allowed vlan 3,41-43,45,100
+ switchport mode trunk
+!
+interface TenGigabitEthernet2/2/4
+ switchport trunk allowed vlan 3,41-43,45,100
+ switchport mode trunk
+!
+interface TenGigabitEthernet2/2/5
+ switchport trunk allowed vlan 3,41-43,45,100
+ switchport mode trunk
+!
+interface TenGigabitEthernet2/2/6
+!
+interface TenGigabitEthernet2/2/7
+!
+interface TenGigabitEthernet2/2/8
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast edge
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan2
+ description TO-Juniper SRX550
+ ip address 10.12.2.2 255.255.255.0
+!
+interface Vlan3
+ description CONNECT-VIOCE-SWTICH
+ ip dhcp client lease 1 0 0
+ ip address 10.12.3.1 255.255.255.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan5
+ description TO-SSL VPN
+ ip address 10.12.5.1 255.255.255.0
+!
+interface Vlan10
+ description CONNECT-SERVER
+ ip address 10.11.10.1 255.255.255.0
+!
+interface Vlan11
+ description TO-OFFICE-1F
+ ip address 10.12.11.1 255.255.255.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan12
+ description TO-OFFICE-2F
+ ip address 10.12.12.1 255.255.255.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan13
+ description TO-OFFICE-3F
+ ip address 10.12.13.1 255.255.255.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan14
+ description TO-OFFICE-4F
+ ip address 10.12.14.1 255.255.255.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan15
+ description TO-OFFICE-5F
+ ip address 10.12.15.1 255.255.255.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan16
+ description TO-OFFICE-6F
+ ip address 10.12.16.1 255.255.255.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan17
+ description to-demo
+ ip address 10.12.17.1 255.255.255.0
+ ip helper-address 10.11.10.10 
+ ip helper-address 10.11.10.12 
+!
+interface Vlan20
+ description MGT-VLAN
+ ip address 10.12.20.1 255.255.255.0
+ arp timeout 300
+!
+interface Vlan30
+ description TO-PRINT
+ ip address 10.12.30.1 255.255.255.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan41
+ description TO-wireless-BTBX
+ ip address 10.12.41.1 255.255.254.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan42
+ ip address 10.12.42.1 255.255.254.0
+ shutdown
+!
+interface Vlan43
+ description TO-wiress-WMS
+ ip address 10.12.43.1 255.255.255.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan45
+ description to wireless BTB
+ ip address 10.12.45.1 255.255.254.0
+!
+interface Vlan46
+ description T0-wiress-WAP-CS
+ ip address 10.12.46.1 255.255.254.0
+ ip helper-address 10.11.10.10 
+ ip helper-address 10.11.10.12 
+!
+interface Vlan48
+ description TO-wireless-WCS
+ ip address 10.12.48.1 255.255.255.0
+ ip helper-address 10.11.10.10 
+ ip helper-address 10.11.10.12 
+!
+interface Vlan99
+ description TO-CCTV
+ ip address 172.16.0.1 255.255.252.0
+ ip access-group 172 out
+!
+interface Vlan100
+ description TO-changqu
+ ip address 10.12.100.1 255.255.255.0
+ ip helper-address 10.11.10.12 
+ ip helper-address 10.11.10.10 
+!
+interface Vlan101
+ ip address 10.11.20.1 255.255.255.0
+!
+ip forward-protocol nd
+ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.12.2.1
+ip route 2.2.2.0 255.255.255.0 10.12.2.1
+ip route 10.11.0.0 255.255.0.0 Null0
+ip route 10.12.0.0 255.255.0.0 Null0
+!
+ip access-list extended DENY
+ deny   ip host 128.199.193.70 any
+ deny   ip host 27.102.66.124 any
+ deny   ip host 185.193.38.24 any
+ deny   ip host 45.153.185.67 any
+ permit ip any any
+ip access-list extended VSL-BFD
+ permit udp any any eq 3784
+ip access-list extended VSL-DHCP-CLIENT-TO-SERVER
+ permit udp any eq bootpc any eq bootps
+ip access-list extended VSL-DHCP-SERVER-TO-CLIENT
+ permit udp any eq bootps any eq bootpc
+ip access-list extended VSL-DHCP-SERVER-TO-SERVER
+ permit udp any eq bootps any eq bootps
+ip access-list extended VSL-IPV4-ROUTING
+ permit ip any 224.0.0.0 0.0.0.255
+!
+access-list 61 permit 10.11.10.38
+access-list 61 permit 10.11.10.68
+access-list 61 deny   any
+access-list 142 deny   ip any 10.0.0.0 0.255.255.255
+access-list 142 permit ip any any
+access-list 172 permit ip any host 172.16.0.240
+access-list 172 permit ip any host 172.16.0.198
+access-list 172 permit ip any host 172.16.0.150
+access-list 172 permit ip any host 172.16.0.151
+access-list 172 permit ip any host 172.16.0.250
+access-list 172 permit ip any host 172.16.0.130
+access-list 172 permit ip any host 172.16.0.249
+access-list 172 permit ip any host 172.16.0.200
+access-list 172 permit ip any host 172.16.0.230
+access-list 172 permit tcp any 172.16.0.0 0.0.255.255 eq 8000
+access-list 172 permit ip host 10.11.10.62 any
+access-list 172 permit ip any host 172.16.0.210
+access-list 172 permit ip any host 172.16.0.208
+access-list 172 permit ip any host 10.12.20.15
+access-list 172 permit ip any host 10.12.20.95
+access-list 172 permit ip host 172.16.0.152 any
+access-list 172 permit ip any host 172.16.0.152
+!
+snmp-server community WAPRO RO 61
+snmp-server community public RO
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server host 10.11.10.90 public 
+!
+ipv6 access-list VSL-IPV6-ROUTING
+ permit ipv6 any FF02::/124
+!
+!
+line con 0
+ stopbits 1
+line vty 0 4
+ password wapsh
+ login local
+!
+!
+module provision switch 1
+ chassis-type 70 base-mac 70EA.1ACD.8800
+ slot 1 slot-type 401 base-mac 70EA.1ACD.8800
+ slot 2 slot-type 400 base-mac 40CE.2482.CAE0
+ !
+module provision switch 2
+ chassis-type 70 base-mac D4C9.3C2B.7D80
+ slot 1 slot-type 401 base-mac D4C9.3C2B.7D80
+ slot 2 slot-type 400 base-mac 005D.7336.4408
+ 
+!
+
+ !
+end
+
+sw01#

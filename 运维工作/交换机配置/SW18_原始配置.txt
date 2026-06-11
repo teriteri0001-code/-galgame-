@@ -1,0 +1,257 @@
+dis current-configuration
+#
+ version 7.1.070, Release 1132
+#
+ sysname SW18
+#
+ telnet server enable
+#
+ irf mac-address persistent timer
+ irf auto-update enable
+ undo irf link-delay
+ irf member 1 priority 1
+#
+ mac-address mac-roaming enable
+#
+ lldp global enable
+#
+ password-recovery enable
+#
+vlan 1
+#
+vlan 20
+ description MGT-VLAN
+#
+----               vlan 48
+ description TO-wireless-WCS
+#
+ stp port-log instance 0 to 4094 
+ stp port-log vlan 1 to 4094 
+ stp global enable
+#
+interface Bridge-Aggregation1
+ port link-type trunk
+ port trunk permit vlan 1 20 48
+#
+interface NULL0
+#
+interface Vlan-interface1
+ ip address dhcp-alloc
+ dhcp client identifier ascii d4a23d097c78-VLAN0001
+ ipv6 address dhcp-alloc
+ ipv6 dhcp client duid ascii d4a23d097c78-VLAN0001
+#
+interface Vlan-interface20
+ description MGT-VLAN
+ ip address 10.12.20.18 255.255.255.0
+#
+----               interface GigabitEthernet1/0/1
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/2
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/3
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/4
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/5
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/6
+ port access vlan 48
+ poe enable
+----               #
+interface GigabitEthernet1/0/7
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/8
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/9
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/10
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/11
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/12
+ port access vlan 48
+----                poe enable
+#
+interface GigabitEthernet1/0/13
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/14
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/15
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/16
+ port access vlan 48
+ poe enable
+#
+interface GigabitEthernet1/0/17
+ poe enable
+#
+interface GigabitEthernet1/0/18
+ port link-type trunk
+----                port trunk permit vlan 1 20 48
+ poe enable
+ port link-aggregation group 1
+#
+interface GigabitEthernet1/0/19
+ poe enable
+#
+interface GigabitEthernet1/0/20
+ port link-type trunk
+ port trunk permit vlan 1 20 48
+ port link-aggregation group 1
+#
+interface GigabitEthernet1/0/21
+ poe enable
+#
+interface GigabitEthernet1/0/22
+ poe enable
+#
+interface GigabitEthernet1/0/23
+ poe enable
+#
+interface GigabitEthernet1/0/24
+ poe enable
+----               #
+interface GigabitEthernet1/0/25
+#
+interface GigabitEthernet1/0/26
+#
+interface GigabitEthernet1/0/27
+#
+interface GigabitEthernet1/0/28
+#
+ scheduler logfile size 16
+#
+line class aux
+ user-role network-admin
+#
+line class vty
+ user-role network-operator
+#
+line aux 0
+ user-role network-admin
+#
+line vty 0 63
+ authentication-mode scheme
+ user-role network-admin
+----               #
+ ip route-static 0.0.0.0 0 10.12.20.1
+#
+ ssh server enable
+#
+ arp ip-conflict log prompt
+ arp user-ip-conflict record enable
+#
+ super password role network-admin hash $h$6$ZgqvB31wYxgSrujY$AddGcKsTLuGBi7S98c6J1aTA1hyR7M1BsKPmtNzh/vQZ8Jm9rSDO/JAMIPTXUypn1ejb9er9xsrhN3+kSY+EgQ==
+#
+radius scheme system
+ user-name-format without-domain
+#
+domain system
+#
+ domain default enable system
+#
+role name level-0
+ description Predefined level-0 role
+#
+role name level-1
+ description Predefined level-1 role
+#
+----               role name level-2
+ description Predefined level-2 role
+#
+role name level-3
+ description Predefined level-3 role
+#
+role name level-4
+ description Predefined level-4 role
+#
+role name level-5
+ description Predefined level-5 role
+#
+role name level-6
+ description Predefined level-6 role
+#
+role name level-7
+ description Predefined level-7 role
+#
+role name level-8
+ description Predefined level-8 role
+#
+role name level-9
+ description Predefined level-9 role
+----               #
+role name level-10
+ description Predefined level-10 role
+#
+role name level-11
+ description Predefined level-11 role
+#
+role name level-12
+ description Predefined level-12 role
+#
+role name level-13
+ description Predefined level-13 role
+#
+role name level-14
+ description Predefined level-14 role
+#
+user-group system
+#
+local-user admin class manage
+ password hash $h$6$k928V1JHFrdoo68Q$axjQQShYhj8W5PkoU26wS5d6s+wNRZKMPZL5xsMwIZd7ABV7VOF0rGuqmF0W+nwNllfvHi0t5XO8OYI6gq7L2Q==
+ service-type telnet http https ssh
+ authorization-attribute user-role network-admin
+ authorization-attribute user-role network-operator
+----                password-control length 4
+ password-control composition type-number 1 type-length 1
+ undo password-control complexity user-name check
+#
+local-user cisco class manage
+ password hash $h$6$3C9WIezbEEu+Ppuj$gNaRIhEaoli8RBE24p7O6tgWTnxFDcpscHLnwB1TzKau1zp2nFHlRFmctag+TtE724FRc50xICxN8L3Fd1qFTw==
+ service-type telnet ssh
+ authorization-attribute user-role network-admin
+ authorization-attribute user-role network-operator
+#
+local-user clouduser class manage
+ password hash $h$6$80JAhoosbFqe4Ps4$zkKcqfQWPMvtmQMX/zTPshMWvb2bSZj0BwcKlVONEWtJYqY52a5A4D3sIqni4yfD68z6eEEr2FxYhvXmQiD5ZQ==
+ service-type http
+ authorization-attribute user-role network-admin
+#
+ netconf soap http enable
+#
+ ip http enable
+ ip https enable
+#
+ smartmc tc enable
+#
+ cloud-management server domain cloudnet.h3c.com
+----               #
+return
+[SW18]
