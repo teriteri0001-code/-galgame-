@@ -1,0 +1,23 @@
+CNW2KD0113
+CNW2KD00ND 0d20 
+CNW2KD0078 94:ff:06:cc:06:e6
+CNW2KD00TJ 94:ff:06:cc:02:a4
+CNW2KD014J 0966
+CNW2KD00NL  09b2
+CNW2KD007P 94:ff:06:cc:02:10
+CNW2KD007F 94:ff:06:cc:03:4c
+CNW2KD007N
+CNW2KD014C
+CNW2KD007Q 94:ff:06:cc:06:06
+
+GE1/0/3         94ff-06cc-0966  94ff-06cc-0966             94:ff:06:cc:09:66  AP1
+GE1/0/4         94ff-06cc-06e6  94ff-06cc-06e6             94:ff:06:cc:06:e6  AP4
+GE1/0/5         94ff-06cc-0d20  94ff-06cc-0d20             94:ff:06:cc:0d:20 AP11
+GE1/0/9         94ff-06cc-02a4  94ff-06cc-02a4             94:ff:06:cc:02:a4 AP7
+GE1/0/10        94ff-06cc-09b2  94ff-06cc-09b2             94:ff:06:cc:09:b2  AP8
+GE1/0/11        94ff-06cc-0606  94ff-06cc-0606             94:ff:06:cc:06:06 AP5
+GE1/0/12        94ff-06cc-0210  94ff-06cc-0210             94:ff:06:cc:02:10 AP2
+GE1/0/14        94ff-06cc-034c  94ff-06cc-034c             94:ff:06:cc:03:4c AP3
+GE1/0/6 AP9
+GE1/0/8 AP6
+GE1/0/13 AP10
