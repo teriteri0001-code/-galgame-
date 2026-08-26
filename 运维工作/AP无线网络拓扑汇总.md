@@ -1,3 +1,7 @@
+---
+modified: '2026-08-26T15:54:50.266040'
+---
+
 # AP 无线网络拓扑与配置汇总
 
 > **整理时间：** 2026-06-11
@@ -88,3 +92,34 @@
 - [ ] 在核心 SW01 查看 DHCP 分配情况：`show ip dhcp binding | include 10.12.48`
 - [ ] 物理巡检：确认断开的 AP 网线/光纤是否正常
 - [ ] 记录每个 AP 对应的端口号和物理位置
+
+
+---
+
+## WiFi 内网隔离机制（2026-08-26 更新）
+
+### SSID 角色与内网访问权限
+
+| SSID | Aruba Profile | initial-role | 认证方式 | 实际角色 | 能否访问内网 |
+|------|--------------|-------------|----------|----------|-------------|
+| BTBX | BTBX | logon | 802.1X (RADIUS→10.11.10.51) | guest（RADIUS下发） | 能 |
+| WMS | WMS | guest | PSK | guest | 能 |
+| WCS | WCS | guest | PSK | guest | 能 |
+| BTB | SC-BTB | logon | PSK | logon | 不能（访客网） |
+| WAP | SC-WAP | logon | PSK | logon | 不能（访客网） |
+| WAP-CS | WAP-CS | logon | PSK | logon | 待确认 |
+
+### 关键发现
+
+隔离机制在 **Aruba AC** 上，不在核心交换机 ACL，不在防火墙。
+
+- logon 角色 = Aruba 内置受限，不能访问内网
+- guest 角色 = ACL 为空 = 全部放行
+- PSK 的 SSID：initial-role 决定最终角色
+- 802.1X 的 SSID：RADIUS 下发角色覆盖 initial-role
+
+**内网访问需要两个条件：**
+1. initial-role = guest（或 RADIUS 下发 guest）
+2. VLAN 有 DHCP helper 指向内网 DNS
+
+详细文档：[[WiFi内网隔离机制]]
